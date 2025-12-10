@@ -1,25 +1,61 @@
-import logo from './logo.svg';
-import './App.css';
+// src/App.js
+import React, { lazy, Suspense } from "react";
+import {
+  createBrowserRouter,
+  RouterProvider,
+  Outlet,
+} from "react-router-dom";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+import Header from "./component/Header";
+import Sidebar from "./component/Sidebar";
+import PrivateRoute from "./component/PrivateRoute.jsx";
+
+// Lazy Components
+const Dashboard = lazy(() => import("./component/Dashboard/Dashboard.jsx"));
+
+
+// ------------------- LAYOUT -------------------
+const AppLayout = () => (
+  <>
+    <Header />
+    <div className="main-container">
+      <Sidebar />
+      <Suspense fallback={<div className="loading">Loading...</div>}>
+        <Outlet />
+      </Suspense>
     </div>
-  );
+  </>
+);
+
+
+// ------------------- ROUTER CONFIG -------------------
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <AppLayout />,
+    children: [
+      {
+        index: true,
+        element: <Dashboard />, // default page
+      },
+
+      // Protected Routes (inside PrivateRoute)
+      {
+        element: <PrivateRoute />,
+        children: [
+          { path: "dashboard", element: <Dashboard /> },
+        ],
+      },
+    ],
+  },
+
+  
+]);
+
+
+// ------------------- APP ROOT -------------------
+function App() {
+  return <RouterProvider router={router} />;
 }
 
 export default App;
