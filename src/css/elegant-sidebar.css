@@ -1,0 +1,173 @@
+/* ========== ELEGANT SIDEBAR ========== */
+
+/* Main container */
+.elegant-sidebar {
+  width: 260px;
+  background: linear-gradient(180deg, #0D1B2A 0%, #1A293A 100%);
+  color: #E0E1DD;
+  height: 100vh;
+  position: fixed;
+  left: 0;
+  top: 0;
+  padding: 1.5rem;
+  z-index: 1000;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  border-right: 1px solid #2A3B4C;
+}
+
+/* Hide scrollbar for Webkit browsers */
+.elegant-sidebar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.elegant-sidebar {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+
+.elegant-sidebar.closed {
+  transform: translateX(-100%);
+}
+
+.elegant-sidebar.open {
+  transform: translateX(0);
+}
+
+/* ========== LOGO ========== */
+.logo {
+  text-align: center;
+  padding: 15px 0;
+  margin-bottom: 30px;
+  border-bottom: 1px solid #2A3B4C;
+}
+
+.logo-img {
+  width: 140px;
+  height: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.1));
+}
+
+/* ========== NAVIGATION ========== */
+.sidebar-nav {
+  margin-top: 20px;
+}
+
+.sidebar-nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* ========== PARENT MENU STYLING ========== */
+.menu-parent {
+  margin-bottom: 8px;
+}
+
+.menu-link {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.9rem 1.25rem;
+  border-radius: 10px;
+  color: #B0BACC;
+  cursor: pointer;
+  transition: background 0.25s ease, color 0.25s ease, box-shadow 0.25s ease;
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.menu-link:hover {
+  background: rgba(255, 255, 255, 0.05);
+  color: #FFFFFF;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Parent-only behavior */
+.menu-link.parent {
+  justify-content: space-between;
+}
+
+/* ACTIVE MENU HIGHLIGHT */
+.menu-link.active {
+  background: #3B82F6;
+  color: #FFFFFF;
+  font-weight: 600;
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.2);
+}
+
+/* Chevron icon styling */
+.menu-link .fa-chevron-down,
+.menu-link .fa-chevron-up {
+  font-size: 12px;
+  color: #7C8D9E;
+  transition: transform 0.3s;
+}
+
+.menu-link:hover .fa-chevron-down,
+.menu-link:hover .fa-chevron-up {
+  color: #FFFFFF;
+}
+
+.menu-link[aria-expanded="true"] .fa-chevron-down {
+    transform: rotate(180deg);
+}
+
+
+/* ========== SUBMENU DROPDOWN ========== */
+.submenu {
+  padding-left: 2rem;
+  margin-top: 6px;
+  overflow: hidden;
+  max-height: 0;
+  transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.submenu.open {
+    max-height: 500px; /* Adjust as needed */
+}
+
+.submenu li {
+  padding: 0;
+  margin: 0;
+}
+
+.submenu .menu-link {
+  padding: 0.7rem 1.1rem;
+  border-radius: 8px;
+  font-size: 15px;
+  color: #9FAEC1;
+  font-weight: 400;
+}
+
+.submenu .menu-link:hover {
+  background: rgba(255, 255, 255, 0.03);
+  color: #FFFFFF;
+}
+
+/* Active submenu link */
+.submenu .menu-link.active {
+  color: #3B82F6;
+  font-weight: 500;
+  background: transparent;
+  box-shadow: none;
+}
+
+/* Remove bullet behavior */
+.sidebar-nav ul li a {
+  text-decoration: none;
+}
+
+/* Coming soon disabled links */
+.coming-soon {
+  pointer-events: none;
+  opacity: 0.5;
+  color: #7C8D9E;
+}
+
