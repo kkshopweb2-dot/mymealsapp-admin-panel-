@@ -11,7 +11,7 @@ import {
   FaCommentDots,
 } from "react-icons/fa";
 import "../css/sidebar.css";
-import logo from "../assets/logo.png";   
+import logo from '../assets/logo.png';
 
 
 const Sidebar = ({ isOpen }) => {

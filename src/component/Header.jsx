@@ -1,10 +1,8 @@
 import React from 'react';
-import { NavLink } from "react-router-dom";
 import { FaBars } from 'react-icons/fa';
 import styles from './Header/Header.module.css';
-import { imageBaseURL } from '../api/baseURL';
 
-const Header = ({ toggleSidebar, username = "User", userImage }) => {
+const Header = ({ toggleSidebar }) => {
   return (
     <header className={styles['dashboard-header']}>
       <div className={styles['left-section']}>
@@ -17,21 +15,6 @@ const Header = ({ toggleSidebar, username = "User", userImage }) => {
         >
           <FaBars />
         </button>
-      </div>
-
-      <div className={styles['header-right']}>
-        {/* Hello User */}
-        <div className={styles['hello-user']}>
-          Hello, <strong>{username}</strong>
-        </div>
-
-        {/* Profile */}
-        <NavLink to="/Profile" className={styles['profile-avatar']}>
-          <img
-            src={userImage ? `${imageBaseURL}${userImage}` : "https://i.pravatar.cc/40"}
-            alt="User Avatar"
-          />
-        </NavLink>
       </div>
     </header>
   );

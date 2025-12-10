@@ -1,13 +1,13 @@
 // src/App.js
-import React, { lazy, Suspense } from "react";
+import React, { lazy, Suspense, useState } from "react";
 import {
   createBrowserRouter,
   RouterProvider,
   Outlet,
 } from "react-router-dom";
 
-import Header from "./component/Header";
-import Sidebar from "./component/Sidebar";
+import Header from "./component/Header.jsx";
+import Sidebar from "./component/Sidebar.jsx";
 import PrivateRoute from "./component/PrivateRoute.jsx";
 
 // Lazy Components
@@ -15,17 +15,25 @@ const Dashboard = lazy(() => import("./component/Dashboard/Dashboard.jsx"));
 
 
 // ------------------- LAYOUT -------------------
-const AppLayout = () => (
-  <>
-    <Header />
-    <div className="main-container">
-      <Sidebar />
-      <Suspense fallback={<div className="loading">Loading...</div>}>
-        <Outlet />
-      </Suspense>
-    </div>
-  </>
-);
+const AppLayout = () => {
+  const [isSidebarOpen, setSidebarOpen] = useState(true);
+
+  const toggleSidebar = () => {
+    setSidebarOpen(!isSidebarOpen);
+  };
+
+  return (
+    <>
+      <Header toggleSidebar={toggleSidebar} />
+      <div className="main-container">
+        <Sidebar isOpen={isSidebarOpen} />
+        <Suspense fallback={<div className="loading">Loading...</div>}>
+          <Outlet />
+        </Suspense>
+      </div>
+    </>
+  );
+};
 
 
 // ------------------- ROUTER CONFIG -------------------

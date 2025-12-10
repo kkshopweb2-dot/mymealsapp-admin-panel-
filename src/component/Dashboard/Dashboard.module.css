@@ -33,12 +33,6 @@
   }
 }
 
-.dashboard-title:hover {
-  color: #24664b;               
-  transform: scale(1.05);       
-}
-
-
 
 .dashboard-main.sidebar-open {
   margin-left: 16rem;
