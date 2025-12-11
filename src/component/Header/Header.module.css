@@ -23,10 +23,11 @@
   font-size: 1.5rem;
   cursor: pointer;
   transition: color 0.3s ease;
+  z-index: 9999;
 }
 
 .menu-toggle:hover {
-  color: #3B82F6;
+  color: #eff2f6;
 }
 
 .page-title {
