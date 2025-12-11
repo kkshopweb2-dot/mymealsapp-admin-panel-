@@ -1,5 +1,5 @@
 // src/App.js
-import React, { lazy, Suspense, useState } from "react";
+import React, { lazy, Suspense, useState, useEffect } from "react";
 import {
   createBrowserRouter,
   RouterProvider,
@@ -22,16 +22,26 @@ const AppLayout = () => {
     setSidebarOpen(!isSidebarOpen);
   };
 
+  useEffect(() => {
+    if (!isSidebarOpen) {
+      document.body.classList.add("sidebar-closed");
+    } else {
+      document.body.classList.remove("sidebar-closed");
+    }
+  }, [isSidebarOpen]);
+
   return (
-    <>
-      <Header toggleSidebar={toggleSidebar} />
-      <div className="main-container">
-        <Sidebar isOpen={isSidebarOpen} />
-        <Suspense fallback={<div className="loading">Loading...</div>}>
-          <Outlet />
-        </Suspense>
+    <div className="app-layout">
+      <Sidebar isOpen={isSidebarOpen} />
+      <div className="main-content">
+        <Header toggleSidebar={toggleSidebar} />
+        <main className="content-area">
+          <Suspense fallback={<div className="loading">Loading...</div>}>
+            <Outlet />
+          </Suspense>
+        </main>
       </div>
-    </>
+    </div>
   );
 };
 

@@ -1,16 +1,12 @@
 .dashboard-container {
-  .dashboard-container {
   width: 100%;
-  height: 100vh;
+  height: 100vh; /* Occupy full height of parent content-area */
   background-image: url('../../assets/bg.png');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-
   display: flex;
   flex-direction: column;
-  padding: 20px;
-}
 }
 
 .dashboard-title {
@@ -41,16 +37,10 @@
   }
 }
 
-
-.dashboard-main.sidebar-open {
-  margin-left: 16rem;
-}
-
 .dashboard-content {
   flex: 1;
   overflow-y: auto;
-  padding: 2rem;
-  
+  /* Removed padding here as it's now handled by the .content-area in App.css */
 }
 
 /* Responsive adjustment */
@@ -63,5 +53,3 @@
     margin-left: 0;
   }
 }
-
-/* Individual card styling */

@@ -1,54 +1,46 @@
-/* ===== HEADER MAIN CONTAINER ===== */
 .dashboard-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1.2rem 2rem;
-  background-color: #fff;
-  border-bottom: 1px solid #2A3B4C;
-}
-
-/* ===== LEFT SECTION ===== */
-.left-section {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-}
-
-/* Menu Button */
-.menu-toggle {
-  display: inline-block;
-  font-size: 1.3rem;
-  background: transparent;
-  color: #2A3B4C;
-  border: 1px solid #2A3B4C;
-  border-radius: 25px;
-  padding: 8px 16px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background 0.3s ease, color 0.3s ease;
-}
-
-.menu-toggle:hover {
-  background: rgba(255, 255, 255, 0.05);
-  color: #FFFFFF;
-}
-
-/* Page Title */
-.page-title {
-  font-size: 1.4rem;
-  font-weight: 600;
+  padding: 1rem 2rem;
+  background-color: #1A293A;
   color: #E0E1DD;
 }
 
-/* ===== RIGHT SECTION ===== */
-.right-section {
+.left-section {
   display: flex;
   align-items: center;
   gap: 1.5rem;
 }
 
-/* Notification Bell */
+.menu-toggle {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: transparent;
+  border: none;
+  color: #E0E1DD;
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.menu-toggle:hover {
+  color: #3B82F6;
+}
+
+.page-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #E0E1DD; /* Ensuring title color is correct */
+}
+
+.right-section {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
 .icon-wrapper {
   position: relative;
   cursor: pointer;
@@ -56,93 +48,33 @@
 
 .icon {
   font-size: 1.4rem;
-  color: #2A3B4C;
+  color: #B0BACC;
+  transition: color 0.3s ease;
 }
 
 .icon:hover {
   color: #FFFFFF;
 }
 
-/* ===== PROFILE IMAGE ===== */
 .profile-wrapper {
   display: flex;
   align-items: center;
 }
 
 .profile-img {
-  width: 38px;
-  height: 38px;
+  width: 42px;
+  height: 42px;
   border-radius: 50%;
   object-fit: cover;
-  border: 2px solid #2A3B4C;
-  background-color: #1A293A;
+  border: 2px solid #3B82F6;
 }
 
-/* ===== FIRST LETTER BADGE (If no image) ===== */
-.profile-letter {
-  width: 38px;
-  height: 38px;
-  border-radius: 50%;
-  background: #104b45;
-  color: white;
-  font-weight: 600;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.1rem;
-}
-
-/* ===== SEARCH BOX (If used) ===== */
-.header-search {
-  display: flex;
-  align-items: center;
-  background: #fff;
-  padding: 6px 14px;
-  border-radius: 20px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-}
-
-.search-input {
-  border: none;
-  outline: none;
-  margin-left: 8px;
-  width: 260px;
-  background: transparent;
-  font-size: 0.95rem;
-}
-
-.search-button {
-  background: transparent;
-  border: none;
-  cursor: pointer;
-}
-
-/* ===== LOGOUT BUTTON ===== */
-.logout-btn {
-  background: #ff4d4f;
-  color: #fff;
-  border: none;
-  padding: 6px 12px;
-  border-radius: 20px;
-  cursor: pointer;
-  font-weight: 500;
-  display: flex;
-  align-items: center;
-  gap: 5px;
-}
-
-.logout-btn:hover {
-  background: #e04345;
-}
-
-/* ===== MOBILE RESPONSIVE ===== */
 @media (max-width: 768px) {
-  
-  .search-input {
-    width: 150px;
-  }
-
   .dashboard-header {
     padding: 1rem;
+  }
+
+  .page-title {
+    display: none;
   }
 }
