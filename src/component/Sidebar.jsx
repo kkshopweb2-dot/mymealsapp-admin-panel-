@@ -8,12 +8,13 @@ import {
   FaComments,
   FaChevronDown,
   FaChevronUp,
+  FaBars,
 } from "react-icons/fa";
 
 import "../css/elegant-sidebar.css"; // Use the elegant sidebar styles
 import logo from "../assets/logo.png";
 
-const Sidebar = ({ isOpen }) => {
+const Sidebar = ({ isOpen, toggleSidebar }) => {
   const [openMenu, setOpenMenu] = useState(null);
 
   const toggleMenu = (menuName) => {
@@ -22,9 +23,19 @@ const Sidebar = ({ isOpen }) => {
 
   return (
     <aside className={`elegant-sidebar ${isOpen ? "open" : "closed"}`}>
-      {/* LOGO */}
-      <div className="logo">
-        <img src={logo} alt="MyMeals Logo" className="logo-img" />
+      {/* LOGO & TOGGLE BUTTON */}
+      <div className="logo-container">
+        <div className="logo">
+          <img src={logo} alt="MyMeals Logo" className="logo-img" />
+        </div>
+        <button
+          type="button"
+          title="Toggle Menu"
+          className="menu-toggle"
+          onClick={toggleSidebar}
+        >
+          <FaBars />
+        </button>
       </div>
 
       <nav className="sidebar-nav">

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Sidebar from '../component/Sidebar';
 import Header from '../component/Header';
 import Dashboard from '../component/Dashboard/Dashboard';
+import styles from './DashboardPage.module.css';
 
 const DashboardPage = () => {
   const [sidebarOpen, setSidebarOpen] = useState(true);
@@ -18,11 +19,10 @@ const DashboardPage = () => {
   };
 
   return (
-    <div style={{ display: 'flex' }}>
-      <Sidebar isOpen={sidebarOpen} />
-      <div style={{ flex: 1, marginLeft: sidebarOpen ? '250px' : '0' }}>
+    <div className={styles.dashboardContainer}>
+      <Sidebar isOpen={sidebarOpen} toggleSidebar={toggleSidebar} />
+      <div className={`${styles.mainContent} ${sidebarOpen ? styles.sidebarOpen : styles.sidebarClosed}`}>
         <Header 
-          toggleSidebar={toggleSidebar} 
           admin={admin} 
         />
         <Dashboard />

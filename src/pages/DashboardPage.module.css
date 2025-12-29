@@ -1,0 +1,23 @@
+.menu_toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: 1px solid #e0e0e0;
+  color: #555;
+  font-size: 1.2rem;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  z-index: 1001;
+}
+
+.menu_toggle:hover {
+  background: #f5f5f5;
+  color: #333;
+}
