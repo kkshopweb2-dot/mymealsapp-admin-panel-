@@ -10,6 +10,7 @@ import PrivateRoute from "./component/PrivateRoute.jsx";
 // Lazy Components
 const DashboardPage = lazy(() => import("./pages/DashboardPage.jsx"));
 const LoginPage = lazy(() => import("./pages/LoginPage.jsx"));
+const UserDetails = lazy(() => import("./component/UserDetails.jsx"));
 
 // ------------------- ROUTER CONFIG -------------------
 const router = createBrowserRouter([
@@ -17,11 +18,12 @@ const router = createBrowserRouter([
     path: "/",
     element: <DashboardPage />,
     children: [
-      // Protected Routes (inside PrivateRoute)
+      // Protected Routes
       {
         element: <PrivateRoute />,
         children: [
           { path: "dashboard", element: <DashboardPage /> },
+          { path: "users", element: <UserDetails /> }, // ✅ USER DETAILS ROUTE
         ],
       },
     ],
@@ -29,10 +31,8 @@ const router = createBrowserRouter([
   {
     path: "/login",
     element: <LoginPage />,
-  }
+  },
 ]);
-
-
 
 // ------------------- APP ROOT -------------------
 function App() {

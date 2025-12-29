@@ -52,7 +52,7 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
             </div>
             <ul className={`submenu ${openMenu === "dashboard" ? "open" : ""}`}>
               <li>
-                <NavLink to="/user-details" className="menu-link">
+                <NavLink to="/Users" className="menu-link">
                   User Details
                 </NavLink>
               </li>
