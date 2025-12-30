@@ -52,7 +52,7 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
             </div>
             <ul className={`submenu ${openMenu === "dashboard" ? "open" : ""}`}>
               <li>
-                <NavLink to="/Users" className="menu-link">
+                <NavLink to="/users" className="menu-link">
                   User Details
                 </NavLink>
               </li>
@@ -61,6 +61,8 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
                   User Lifecycle
                 </NavLink>
               </li>
+
+              
             </ul>
           </li>
 
