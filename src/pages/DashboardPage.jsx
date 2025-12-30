@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Sidebar from '../component/Sidebar';
 import Header from '../component/Header';
-import Dashboard from '../component/Dashboard/Dashboard';
+import { Outlet } from 'react-router-dom';
 import styles from './DashboardPage.module.css';
 
 const DashboardPage = () => {
@@ -25,7 +25,7 @@ const DashboardPage = () => {
         <Header 
           admin={admin} 
         />
-        <Dashboard />
+        <Outlet />
       </div>
     </div>
   );

@@ -12,6 +12,7 @@ const DashboardPage = lazy(() => import("./pages/DashboardPage.jsx"));
 const LoginPage = lazy(() => import("./pages/LoginPage.jsx"));
 const UserDetails = lazy(() => import("./component/UserDetails.jsx"));
 const UserLifecycle = lazy(() => import("./component/UserLifecycle.jsx"));
+const Dashboard = lazy(() => import("./component/Dashboard/Dashboard.jsx"));
 
 // ------------------- ROUTER CONFIG -------------------
 const router = createBrowserRouter([
@@ -23,18 +24,19 @@ const router = createBrowserRouter([
       {
         element: <PrivateRoute />,
         children: [
-          { path: "dashboard", element: <DashboardPage /> },
+          { index: true, element: <Dashboard /> },
+          { path: "dashboard", element: <Dashboard /> },
           { path: "users", element: <UserDetails /> }, // ✅ USER DETAILS ROUTE
           { path: "user-lifecycle", element: <UserLifecycle /> },
-          { path: "order-details", element: <DashboardPage /> },
-          { path: "create-order", element: <DashboardPage /> },
-          { path: "meal-creation", element: <DashboardPage /> },
-          { path: "plan-master", element: <DashboardPage /> },
-          { path: "meal-master", element: <DashboardPage /> },
-          { path: "payment-table", element: <DashboardPage /> },
-          { path: "employee-details", element: <DashboardPage /> },
-          { path: "notifications", element: <DashboardPage /> },
-          { path: "system-configurations", element: <DashboardPage /> },
+          { path: "order-details", element: <Dashboard /> },
+          { path: "create-order", element: <Dashboard /> },
+          { path: "meal-creation", element: <Dashboard /> },
+          { path: "plan-master", element: <Dashboard /> },
+          { path: "meal-master", element: <Dashboard /> },
+          { path: "payment-table", element: <Dashboard /> },
+          { path: "employee-details", element: <Dashboard /> },
+          { path: "notifications", element: <Dashboard /> },
+          { path: "system-configurations", element: <Dashboard /> },
         ],
       },
     ],
