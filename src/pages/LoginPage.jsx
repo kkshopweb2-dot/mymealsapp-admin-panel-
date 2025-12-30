@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { login } from '../redux/authSlice';
-import { Link, useNavigate } from 'react-router-dom';
+import { loginUser } from '../redux/authSlice';
+import { useNavigate } from 'react-router-dom';
 import "../css/login.css";
 import bg from "../assets/bg.png";
 
@@ -13,13 +13,14 @@ const Login = () => {
 
   const handleLogin = (e) => {
     e.preventDefault();
-    dispatch(login({ email, password }))
+
+    dispatch(loginUser({ email, password }))
       .unwrap()
       .then(() => {
         navigate('/dashboard');
       })
       .catch((err) => {
-        console.error(err);
+        console.error("Login failed:", err);
       });
   };
 
@@ -39,37 +40,42 @@ const Login = () => {
       }}
     >
       <h1 className="login-title">My Meals</h1>
+
       <div className="form-area">
         <p className="form-title">LOGIN</p>
+
         <form onSubmit={handleLogin}>
           <div className="form-group">
-            <label className="sub-title" htmlFor="email">Email</label>
+            <label className="sub-title">Email</label>
             <input
+              type="email"
               placeholder="Enter your email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              id="email"
               className="form-style"
-              type="email"
+              required
             />
           </div>
+
           <div className="form-group">
-            <label className="sub-title" htmlFor="password">Password</label>
+            <label className="sub-title">Password</label>
             <input
+              type="password"
               placeholder="Enter your password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              id="password"
               className="form-style"
-              type="password"
+              required
             />
           </div>
+
           <button className="btn" type="submit">Login</button>
         </form>
-        
       </div>
     </div>
   );
 };
 
 export default Login;
+
+
