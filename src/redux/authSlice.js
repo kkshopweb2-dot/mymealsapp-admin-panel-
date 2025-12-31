@@ -7,15 +7,22 @@ export const loginUser = createAsyncThunk(
   'auth/loginUser',
   async ({ email, password }, { rejectWithValue }) => {
     try {
-      const response = await fetch(`http://localhost:5000/users?email=${email}&password=${password}`);
-      const users = await response.json();
+      const response = await fetch(LOGIN_API_URL, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, password }),
+      });
 
-      if (users.length > 0) {
-        // Assuming the first user found is the correct one
-        return users[0];
-      } else {
-        return rejectWithValue('Invalid credentials');
+      if (!response.ok) {
+        const errorData = await response.json();
+        return rejectWithValue(errorData.message || 'Invalid credentials');
       }
+
+      const data = await response.json();
+      localStorage.setItem('token', data.token);
+      return data;
     } catch (error) {
       console.log("Error in loginUser:", error);
       return rejectWithValue(error.message);
@@ -26,15 +33,18 @@ export const loginUser = createAsyncThunk(
 const authSlice = createSlice({
   name: 'auth',
   initialState: {
-    isAuthenticated: false, // Default to false
+    isAuthenticated: !!localStorage.getItem('token'),
     user: null,
+    token: localStorage.getItem('token'),
     status: 'idle', // 'idle' | 'loading' | 'succeeded' | 'failed'
     error: null,
   },
   reducers: {
     logout: (state) => {
+      localStorage.removeItem('token');
       state.isAuthenticated = false;
       state.user = null;
+      state.token = null;
       state.status = 'idle';
       state.error = null;
     },
@@ -48,12 +58,14 @@ const authSlice = createSlice({
       .addCase(loginUser.fulfilled, (state, action) => {
         state.status = 'succeeded';
         state.isAuthenticated = true;
-        state.user = action.payload;
+        state.token = action.payload.token;
+        state.user = action.payload.user; // Assuming user info is returned
       })
       .addCase(loginUser.rejected, (state, action) => {
         state.status = 'failed';
         state.isAuthenticated = false;
         state.user = null;
+        state.token = null;
         state.error = action.payload;
       });
   },

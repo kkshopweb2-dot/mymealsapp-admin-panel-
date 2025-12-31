@@ -1,27 +1,29 @@
-import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { loginUser } from '../redux/authSlice';
-import { useNavigate } from 'react-router-dom';
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { loginUser } from "../redux/authSlice";
+import { useNavigate } from "react-router-dom";
 import "../css/login.css";
 import bg from "../assets/bg.png";
 
 const Login = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const handleLogin = (e) => {
+  // Redux state
+  const { loading, error } = useSelector((state) => state.auth);
+
+  const handleLogin = async (e) => {
     e.preventDefault();
 
-    dispatch(loginUser({ email, password }))
-      .unwrap()
-      .then(() => {
-        navigate('/dashboard');
-      })
-      .catch((err) => {
-        console.error("Login failed:", err);
-      });
+    try {
+      await dispatch(loginUser({ email, password })).unwrap();
+      navigate("/dashboard");
+    } catch (err) {
+      console.error("Login failed:", err);
+    }
   };
 
   return (
@@ -43,6 +45,9 @@ const Login = () => {
 
       <div className="form-area">
         <p className="form-title">LOGIN</p>
+
+        {/* Error Message */}
+        {error && <p className="error-text">{error}</p>}
 
         <form onSubmit={handleLogin}>
           <div className="form-group">
@@ -69,7 +74,9 @@ const Login = () => {
             />
           </div>
 
-          <button className="btn" type="submit">Login</button>
+          <button className="btn" type="submit" disabled={loading}>
+            {loading ? "Logging in..." : "Login"}
+          </button>
         </form>
       </div>
     </div>
@@ -77,5 +84,4 @@ const Login = () => {
 };
 
 export default Login;
-
 
