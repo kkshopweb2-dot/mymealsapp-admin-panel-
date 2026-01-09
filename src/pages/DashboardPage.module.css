@@ -1,3 +1,25 @@
+.dashboardContainer {
+  display: flex;
+  min-height: 100vh;
+  background-color: #f9fafb;
+}
+
+.mainContent {
+  flex-grow: 1;
+  transition: margin-left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebarOpen {
+  margin-left: 260px;
+}
+
+.sidebarClosed {
+  margin-left: 80px;
+}
+
 .menu_toggle {
   display: flex;
   align-items: center;
