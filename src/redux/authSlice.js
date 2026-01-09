@@ -1,31 +1,24 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import axios from 'axios';
 
-// Assume an API endpoint for login. Replace with your actual endpoint.
 const LOGIN_API_URL = 'http://localhost:5000/api/login';
 
 export const loginUser = createAsyncThunk(
   'auth/loginUser',
   async ({ email, password }, { rejectWithValue }) => {
     try {
-      const response = await fetch(LOGIN_API_URL, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ email, password }),
-      });
-
-      if (!response.ok) {
-        const errorData = await response.json();
-        return rejectWithValue(errorData.message || 'Invalid credentials');
-      }
-
-      const data = await response.json();
+      console.log("Attempting login for:", email);
+      const response = await axios.post(LOGIN_API_URL, { email, password });
+      
+      const data = response.data;
+      console.log("Login successful, received data:", data);
       localStorage.setItem('token', data.token);
       return data;
     } catch (error) {
-      console.log("Error in loginUser:", error);
-      return rejectWithValue(error.message);
+      console.error("Error in loginUser thunk:", error);
+      return rejectWithValue(
+        error.response?.data?.message || error.message || 'Login failed'
+      );
     }
   }
 );
@@ -59,7 +52,7 @@ const authSlice = createSlice({
         state.status = 'succeeded';
         state.isAuthenticated = true;
         state.token = action.payload.token;
-        state.user = action.payload.user; // Assuming user info is returned
+        state.user = action.payload.user;
       })
       .addCase(loginUser.rejected, (state, action) => {
         state.status = 'failed';
@@ -73,4 +66,3 @@ const authSlice = createSlice({
 
 export const { logout } = authSlice.actions;
 export default authSlice.reducer;
-

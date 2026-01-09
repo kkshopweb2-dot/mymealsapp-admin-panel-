@@ -1,29 +1,33 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { loginUser } from "../redux/authSlice";
 import { useNavigate } from "react-router-dom";
+import { loginUser } from "../redux/authSlice";
 import "../css/login.css";
 import bg from "../assets/bg.png";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
+  
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  
+  const { status, error, isAuthenticated } = useSelector((state) => state.auth);
 
-  // Redux state
-  const { loading, error } = useSelector((state) => state.auth);
+  console.log("Login Page render - isAuthenticated:", isAuthenticated, "status:", status);
+
+  // Redirect if already authenticated
+  useEffect(() => {
+    if (isAuthenticated) {
+      console.log("Authenticated detected, navigating to /dashboard");
+      navigate("/dashboard");
+    }
+  }, [isAuthenticated, navigate]);
 
   const handleLogin = async (e) => {
     e.preventDefault();
-
-    try {
-      await dispatch(loginUser({ email, password })).unwrap();
-      navigate("/dashboard");
-    } catch (err) {
-      console.error("Login failed:", err);
-    }
+    // Use the thunk which now uses axios internally
+    dispatch(loginUser({ email, password }));
   };
 
   return (
@@ -46,8 +50,7 @@ const Login = () => {
       <div className="form-area">
         <p className="form-title">LOGIN</p>
 
-        {/* Error Message */}
-        {error && <p className="error-text">{error}</p>}
+        {status === 'failed' && <p className="error-text">{error}</p>}
 
         <form onSubmit={handleLogin}>
           <div className="form-group">
@@ -74,8 +77,8 @@ const Login = () => {
             />
           </div>
 
-          <button className="btn" type="submit" disabled={loading}>
-            {loading ? "Logging in..." : "Login"}
+          <button className="btn" type="submit" disabled={status === 'loading'}>
+            {status === 'loading' ? "Logging in..." : "Login"}
           </button>
         </form>
       </div>
@@ -84,4 +87,3 @@ const Login = () => {
 };
 
 export default Login;
-

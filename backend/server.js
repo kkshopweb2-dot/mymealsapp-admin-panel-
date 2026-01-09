@@ -16,6 +16,7 @@ app.post("/api/login", (req, res) => {
 
   db.query(query, [email], async (err, results) => {
     if (err) {
+      console.error("Database query error:", err);
       return res.status(500).json({ message: "Database error" });
     }
 
