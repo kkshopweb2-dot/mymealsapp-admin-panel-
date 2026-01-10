@@ -9,24 +9,36 @@
   position: fixed;
   left: 0;
   top: 0;
-  padding: 1.5rem;
+  padding: 1.5rem 0;
   z-index: 1000;
   transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   display: flex;
   flex-direction: column;
-  overflow-y: auto;
+  overflow: hidden;
   border-right: 1px solid #2A3B4C;
 }
 
-/* Hide scrollbar for Webkit browsers */
-.elegant-sidebar::-webkit-scrollbar {
-  display: none;
+/* Custom scrollbar for an elegant look */
+.sidebar-nav {
+  scrollbar-width: thin; /* Firefox */
+  scrollbar-color: rgba(255, 255, 255, 0.2) transparent; /* Firefox */
 }
 
-/* Hide scrollbar for IE, Edge and Firefox */
-.elegant-sidebar {
-  -ms-overflow-style: none;  /* IE and Edge */
-  scrollbar-width: none;  /* Firefox */
+.sidebar-nav::-webkit-scrollbar {
+  width: 6px;
+}
+
+.sidebar-nav::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.sidebar-nav::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+}
+
+.sidebar-nav::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.3);
 }
 
 .elegant-sidebar.closed {
@@ -42,9 +54,10 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding-bottom: 1.5rem;
+  padding: 0 1.5rem 1.5rem 1.5rem;
   border-bottom: 1px solid #2A3B4C;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
+  flex-shrink: 0; /* Logo stays at the top */
 }
 
 .logo {
@@ -79,7 +92,12 @@
 
 /* ========== NAVIGATION ========== */
 .sidebar-nav {
-  margin-top: 20px;
+  flex: 1; /* Take up remaining space */
+  overflow-y: auto; /* Enable scrolling for navigation only */
+  min-height: 0; /* Critical for flex scrolling */
+  padding: 0 1.5rem;
+  margin-top: 10px;
+  padding-bottom: 40px; /* Extra space at the bottom */
 }
 
 .sidebar-nav ul {

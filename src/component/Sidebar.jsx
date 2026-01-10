@@ -2,38 +2,42 @@ import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import {
   FaHome,
-  FaShoppingCart,
-  FaUtensils,
   FaUsers,
-  FaComments,
+  FaUtensils,
+  FaClipboardList,
+  FaShoppingCart,
+  FaCreditCard,
+  FaTruck,
+  FaBoxes,
+  FaIndustry,
+  FaShoppingBag,
+  FaUserTie,
+  FaMoneyBillWave,
+  FaEnvelope,
+  FaCogs,
   FaChevronDown,
   FaChevronUp,
   FaBars,
 } from "react-icons/fa";
 
-import "../css/elegant-sidebar.css"; // Use the elegant sidebar styles
+import "../css/elegant-sidebar.css";
 import logo from "../assets/logo.png";
 
 const Sidebar = ({ isOpen, toggleSidebar }) => {
   const [openMenu, setOpenMenu] = useState(null);
 
-  const toggleMenu = (menuName) => {
-    setOpenMenu(openMenu === menuName ? null : menuName);
+  const toggleMenu = (menu) => {
+    setOpenMenu(openMenu === menu ? null : menu);
   };
 
   return (
     <aside className={`elegant-sidebar ${isOpen ? "open" : "closed"}`}>
-      {/* LOGO & TOGGLE BUTTON */}
+      {/* Logo */}
       <div className="logo-container">
         <div className="logo">
           <img src={logo} alt="MyMeals Logo" className="logo-img" />
         </div>
-        <button
-          type="button"
-          title="Toggle Menu"
-          className="menu-toggle"
-          onClick={toggleSidebar}
-        >
+        <button className="menu-toggle" onClick={toggleSidebar}>
           <FaBars />
         </button>
       </div>
@@ -41,130 +45,108 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
       <nav className="sidebar-nav">
         <ul>
           {/* Dashboard */}
-          <li className="menu-parent">
-            <div
-              className="menu-link parent"
-              onClick={() => toggleMenu("dashboard")}
-              aria-expanded={openMenu === "dashboard"}
-            >
+          <li>
+            <NavLink to="/dashboard" className="menu-link">
               <FaHome /> <span>Dashboard</span>
-              {openMenu === "dashboard" ? <FaChevronUp /> : <FaChevronDown />}
-            </div>
-            <ul className={`submenu ${openMenu === "dashboard" ? "open" : ""}`}>
-              <li>
-                <NavLink to="/users" className="menu-link">
-                  User Details
-                </NavLink>
-              </li>
-              <li>
-                <NavLink to="/user-lifecycle" className="menu-link">
-                  User Lifecycle
-                </NavLink>
-              </li>
+            </NavLink>
+          </li>
 
-              
-            </ul>
+          {/* Users */}
+          <li>
+            <NavLink to="/users" className="menu-link">
+              <FaUsers /> <span>Users</span>
+            </NavLink>
+          </li>
+
+          {/* Meals */}
+          <li>
+            <NavLink to="/meals" className="menu-link">
+              <FaUtensils /> <span>Meals</span>
+            </NavLink>
+          </li>
+
+          {/* Plans */}
+          <li>
+            <NavLink to="/plans" className="menu-link">
+              <FaClipboardList /> <span>Plans</span>
+            </NavLink>
           </li>
 
           {/* Orders */}
-          <li className="menu-parent">
-            <div
-              className="menu-link parent"
-              onClick={() => toggleMenu("orders")}
-              aria-expanded={openMenu === "orders"}
-            >
+          <li>
+            <NavLink to="/orders" className="menu-link">
               <FaShoppingCart /> <span>Orders</span>
-              {openMenu === "orders" ? <FaChevronUp /> : <FaChevronDown />}
-            </div>
-            <ul className={`submenu ${openMenu === "orders" ? "open" : ""}`}>
-              <li>
-                <NavLink to="/order-details" className="menu-link">
-                  Order Details
-                </NavLink>
-              </li>
-              <li>
-                <NavLink to="/create-order" className="menu-link">
-                  Create Order
-                </NavLink>
-              </li>
-              <li>
-                <NavLink to="/meal-creation" className="menu-link">
-                  Meal Creation
-                </NavLink>
-              </li>
-            </ul>
+            </NavLink>
           </li>
 
-          {/* Plans & Meals */}
-          <li className="menu-parent">
-            <div
-              className="menu-link parent"
-              onClick={() => toggleMenu("plans")}
-              aria-expanded={openMenu === "plans"}
-            >
-              <FaUtensils /> <span>Plans & Meals</span>
-              {openMenu === "plans" ? <FaChevronUp /> : <FaChevronDown />}
-            </div>
-            <ul className={`submenu ${openMenu === "plans" ? "open" : ""}`}>
-              <li>
-                <NavLink to="/plan-master" className="menu-link">
-                  Plan Master
-                </NavLink>
-              </li>
-              <li>
-                <NavLink to="/meal-master" className="menu-link">
-                  Meal Master
-                </NavLink>
-              </li>
-            </ul>
+          {/* Payments */}
+          <li>
+            <NavLink to="/payments" className="menu-link">
+              <FaCreditCard /> <span>Payments</span>
+            </NavLink>
+          </li>
+
+          {/* Delivery */}
+          <li>
+            <NavLink to="/delivery" className="menu-link">
+              <FaTruck /> <span>Delivery</span>
+            </NavLink>
+          </li>
+
+          {/* Stock */}
+          <li>
+            <NavLink to="/stock" className="menu-link">
+              <FaBoxes /> <span>Stock</span>
+            </NavLink>
+          </li>
+
+          {/* Production */}
+          <li>
+            <NavLink to="/production" className="menu-link">
+              <FaIndustry /> <span>Production</span>
+            </NavLink>
+          </li>
+
+          {/* Purchase */}
+          <li>
+            <NavLink to="/purchase" className="menu-link">
+              <FaShoppingBag /> <span>Purchase</span>
+            </NavLink>
           </li>
 
           {/* Employees */}
-          <li className="menu-parent">
-            <div
-              className="menu-link parent"
-              onClick={() => toggleMenu("employees")}
-              aria-expanded={openMenu === "employees"}
-            >
-              <FaUsers /> <span>Employees</span>
-              {openMenu === "employees" ? <FaChevronUp /> : <FaChevronDown />}
-            </div>
-            <ul className={`submenu ${openMenu === "employees" ? "open" : ""}`}>
-              <li>
-                <NavLink to="/payment-table" className="menu-link">
-                  Payment Table
-                </NavLink>
-              </li>
-              <li>
-                <NavLink to="/employee-details" className="menu-link">
-                  Employee Details
-                </NavLink>
-              </li>
-            </ul>
+          <li>
+            <NavLink to="/employees" className="menu-link">
+              <FaUserTie /> <span>Employees</span>
+            </NavLink>
           </li>
 
-          {/* Messages */}
-          <li className="menu-parent">
-            <div
-              className="menu-link parent"
-              onClick={() => toggleMenu("messages")}
-              aria-expanded={openMenu === "messages"}
-            >
-              <FaComments /> <span>Messages</span>
-              {openMenu === "messages" ? <FaChevronUp /> : <FaChevronDown />}
-            </div>
-            <ul className={`submenu ${openMenu === "messages" ? "open" : ""}`}>
-              <li>
-                <NavLink to="/notifications" className="menu-link">
-                  Messages / Notifications
-                </NavLink>
-              </li>
-              <li>
-                <NavLink to="/system-configurations" className="menu-link">
-                  System Configurations
-                </NavLink>
-              </li>
-            </ul>
+          {/* Salary */}
+          <li>
+            <NavLink to="/salary" className="menu-link">
+              <FaMoneyBillWave /> <span>Salary</span>
+            </NavLink>
+          </li>
+
+          {/* Mail */}
+          <li>
+            <NavLink to="/mail" className="menu-link">
+              <FaEnvelope /> <span>Mail</span>
+            </NavLink>
+          </li>
+
+          {/* Payment Gateway */}
+          <li>
+            <NavLink to="/payment-gateway" className="menu-link">
+              <FaCreditCard /> <span>Payment Gateway</span>
+            </NavLink>
+          </li>
+
+          {/* Settings */}
+          <li>
+            <NavLink to="/settings" className="menu-link">
+              <FaCogs /> <span>Settings</span>
+            </NavLink>
           </li>
         </ul>
       </nav>
