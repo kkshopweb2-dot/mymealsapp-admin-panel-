@@ -7,6 +7,7 @@ import {
   FaTrash,
   FaUpload,
 } from "react-icons/fa";
+import styles from "../css/Meal.module.css";
 
 const ITEMS_PER_PAGE = 5;
 
@@ -58,21 +59,21 @@ const Meal = () => {
   );
 
   return (
-    <div className="p-6 bg-gray-50 min-h-screen">
+    <div className={styles.container}>
       {/* Header */}
-      <div className="flex justify-between items-center mb-6">
-        <h1 className="text-2xl font-semibold">Meals</h1>
+      <div className={styles.pageHeader}>
+        <h1>Meals</h1>
 
         {userRole === "Admin" && (
-          <div className="flex gap-3">
+          <div className={styles.headerActions}>
             <NavLink
               to="/meal-creation"
-              className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded"
+              className={styles.addButton}
             >
               <FaPlus /> Add Meal
             </NavLink>
 
-            <button className="flex items-center gap-2 px-4 py-2 bg-green-600 text-white rounded">
+            <button className={styles.uploadButton}>
               <FaUpload /> Bulk Upload
             </button>
           </div>
@@ -80,18 +81,22 @@ const Meal = () => {
       </div>
 
       {/* Filters */}
-      <div className="bg-white p-4 rounded shadow mb-4 grid grid-cols-4 gap-4">
+      <div className={styles.filters}>
         <input
           type="text"
           placeholder="Search meal..."
-          className="border p-2 rounded"
           value={search}
-          onChange={(e) => setSearch(e.target.value)}
+          onChange={(e) => {
+            setSearch(e.target.value);
+            setPage(1);
+          }}
         />
 
         <select
-          className="border p-2 rounded"
-          onChange={(e) => setDietFilter(e.target.value)}
+          onChange={(e) => {
+            setDietFilter(e.target.value);
+            setPage(1);
+          }}
         >
           <option value="">All Diets</option>
           <option>Keto</option>
@@ -100,8 +105,10 @@ const Meal = () => {
         </select>
 
         <select
-          className="border p-2 rounded"
-          onChange={(e) => setCategoryFilter(e.target.value)}
+          onChange={(e) => {
+            setCategoryFilter(e.target.value);
+            setPage(1);
+          }}
         >
           <option value="">All Categories</option>
           <option>Breakfast</option>
@@ -111,87 +118,94 @@ const Meal = () => {
       </div>
 
       {/* Table */}
-      <div className="bg-white rounded shadow overflow-x-auto">
-        <table className="w-full">
-          <thead className="bg-gray-100">
+      <div className={styles.tableWrapper}>
+        <table className={styles.table}>
+          <thead>
             <tr>
-              <th className="border p-3">Image</th>
-              <th className="border p-3 text-left">Meal</th>
-              <th className="border p-3">Category</th>
-              <th className="border p-3">Diet</th>
-              <th className="border p-3">Calories</th>
-              <th className="border p-3">Price</th>
-              <th className="border p-3">Status</th>
-              <th className="border p-3">Actions</th>
+              <th className={styles.textCenter}>Image</th>
+              <th>Meal</th>
+              <th className={styles.textCenter}>Category</th>
+              <th className={styles.textCenter}>Diet</th>
+              <th className={styles.textCenter}>Calories</th>
+              <th className={styles.textCenter}>Price</th>
+              <th className={styles.textCenter}>Status</th>
+              <th className={styles.textCenter}>Actions</th>
             </tr>
           </thead>
           <tbody>
-            {paginatedMeals.map((meal) => (
-              <tr key={meal.id}>
-                <td className="border p-2 text-center">
-                  <img
-                    src={meal.image}
-                    alt={meal.name}
-                    className="w-12 h-12 rounded object-cover mx-auto"
-                  />
-                </td>
-                <td className="border p-3">{meal.name}</td>
-                <td className="border p-3 text-center">{meal.category}</td>
-                <td className="border p-3 text-center">{meal.dietType}</td>
-                <td className="border p-3 text-center">
-                  {meal.calories} kcal
-                </td>
-                <td className="border p-3 text-center">${meal.price}</td>
-                <td className="border p-3 text-center">
-                  <span
-                    className={`px-2 py-1 rounded text-sm ${
-                      meal.status === "Active"
-                        ? "bg-green-100 text-green-700"
-                        : "bg-red-100 text-red-700"
-                    }`}
-                  >
-                    {meal.status}
-                  </span>
-                </td>
-                <td className="border p-3 text-center space-x-3">
-                  <NavLink
-                    to={`/meals/edit/${meal.id}`}
-                    className="text-blue-600"
-                  >
-                    <FaEdit />
-                  </NavLink>
-
-                  {userRole === "Admin" && (
-                    <button
-                      onClick={() => deleteMeal(meal.id)}
-                      className="text-red-600"
-                    >
-                      <FaTrash />
-                    </button>
-                  )}
+            {paginatedMeals.length === 0 ? (
+              <tr>
+                <td colSpan="8" className={styles.textCenter} style={{ padding: '2rem' }}>
+                  No meals found
                 </td>
               </tr>
-            ))}
+            ) : (
+              paginatedMeals.map((meal) => (
+                <tr key={meal.id}>
+                  <td className={styles.textCenter}>
+                    <img
+                      src={meal.image}
+                      alt={meal.name}
+                      className={styles.mealImage}
+                      onError={(e) => { e.target.src = 'https://placehold.co/50?text=No+Image'; }}
+                    />
+                  </td>
+                  <td>{meal.name}</td>
+                  <td className={styles.textCenter}>{meal.category}</td>
+                  <td className={styles.textCenter}>{meal.dietType}</td>
+                  <td className={styles.textCenter}>
+                    {meal.calories} kcal
+                  </td>
+                  <td className={styles.textCenter}>${meal.price}</td>
+                  <td className={styles.textCenter}>
+                    <span
+                      className={`${styles.status} ${
+                        meal.status === "Active"
+                          ? styles.active
+                          : styles.inactive
+                      }`}
+                    >
+                      {meal.status}
+                    </span>
+                  </td>
+                  <td className={styles.actions}>
+                    <NavLink
+                      to={`/meals/edit/${meal.id}`}
+                      className={styles.editIcon}
+                    >
+                      <FaEdit />
+                    </NavLink>
+
+                    {userRole === "Admin" && (
+                      <button
+                        onClick={() => deleteMeal(meal.id)}
+                        className={styles.deleteIcon}
+                      >
+                        <FaTrash />
+                      </button>
+                    )}
+                  </td>
+                </tr>
+              ))
+            )}
           </tbody>
         </table>
       </div>
 
       {/* Pagination */}
-      <div className="flex justify-end gap-2 mt-4">
-        {[...Array(totalPages)].map((_, i) => (
-          <button
-            key={i}
-            onClick={() => setPage(i + 1)}
-            className={`px-3 py-1 rounded ${
-              page === i + 1
-                ? "bg-blue-600 text-white"
-                : "bg-gray-200"
-            }`}
-          >
-            {i + 1}
-          </button>
-        ))}
-      </div>
+      {totalPages > 1 && (
+        <div className={styles.pagination}>
+          {[...Array(totalPages)].map((_, i) => (
+            <button
+              key={i}
+              onClick={() => setPage(i + 1)}
+              className={page === i + 1 ? styles.activePage : ""}
+            >
+              {i + 1}
+            </button>
+          ))}
+        </div>
+      )}
     </div>
   );
 };
@@ -208,7 +222,7 @@ const mockMeals = [
     calories: 520,
     price: 12,
     status: "Active",
-    image: "https://via.placeholder.com/50",
+    image: "https://placehold.co/50",
   },
   {
     id: 2,
@@ -218,6 +232,6 @@ const mockMeals = [
     calories: 340,
     price: 10,
     status: "Inactive",
-    image: "https://via.placeholder.com/50",
+    image: "https://placehold.co/50",
   },
 ];

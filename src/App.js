@@ -14,6 +14,9 @@ const UserDetails = lazy(() => import("./component/UserDetails.jsx"));
 const OrderDetail = lazy(() => import("./component/OrderDetail.jsx"));
 const Dashboard = lazy(() => import("./component/Dashboard/Dashboard.jsx"));
 const Meal = lazy(() => import("./component/Meal.jsx"));
+const Plans = lazy(() => import("./component/Plans.jsx"));
+const Order = lazy(() => import("./component/Order.jsx"));
+const Payment = lazy(() => import("./component/Payment.jsx"));
 
 // ------------------- ROUTER CONFIG -------------------
 const router = createBrowserRouter([
@@ -29,11 +32,14 @@ const router = createBrowserRouter([
           { path: "dashboard", element: <Dashboard /> },
           { path: "users", element: <UserDetails /> }, // ✅ USER DETAILS ROUTE
           { path: "order-details", element: <OrderDetail /> },
+          { path: "orders", element: <Order /> },
+          { path: "payments", element: <Payment /> },
           { path: "meals", element: <Meal /> },
           { path: "meal-creation", element: <Dashboard /> },
-          { path: "plan-master", element: <Dashboard /> },
+          { path: "plans", element: <Plans /> },
+          { path: "plan-master", element: <Plans /> },
           { path: "meal-master", element: <Dashboard /> },
-          { path: "payment-table", element: <Dashboard /> },
+          { path: "payment-table", element: <Payment /> },
           { path: "payment-gateway", element: <Dashboard /> },
           { path: "employee-details", element: <Dashboard /> },
           { path: "notifications", element: <Dashboard /> },
