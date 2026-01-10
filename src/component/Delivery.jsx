@@ -6,6 +6,7 @@ import {
   FaCheckCircle,
   FaUser,
 } from "react-icons/fa";
+import styles from "../css/Delivery.module.css";
 
 const ITEMS_PER_PAGE = 5;
 
@@ -71,13 +72,11 @@ const Delivery = () => {
   };
 
   return (
-    <div className="p-6 bg-gray-50 min-h-screen">
-      <h1 className="text-2xl font-semibold mb-6">
-        Delivery Management
-      </h1>
+    <div className={styles.deliveryContainer}>
+      <h1 className={styles.title}>Delivery Management</h1>
 
       {/* ANALYTICS */}
-      <div className="grid grid-cols-4 gap-4 mb-6">
+      <div className={styles.analyticsGrid}>
         <Stat title="Total Deliveries" value={analytics.total} />
         <Stat title="Pending" value={analytics.pending} />
         <Stat title="Out for Delivery" value={analytics.out} />
@@ -85,57 +84,60 @@ const Delivery = () => {
       </div>
 
       {/* FILTERS */}
-      <div className="bg-white p-4 rounded shadow mb-4 grid grid-cols-3 gap-4">
-        <input
-          placeholder="Search customer..."
-          className="border p-2 rounded"
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-        />
+      <div className={styles.filterCard}>
+        <div className={styles.filterGrid}>
+          <input
+            placeholder="Search customer..."
+            className={styles.inputField}
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+          />
 
-        <select
-          className="border p-2 rounded"
-          onChange={(e) => setStatusFilter(e.target.value)}
-        >
-          <option value="">All Status</option>
-          <option>Pending</option>
-          <option>Packed</option>
-          <option>Out for Delivery</option>
-          <option>Delivered</option>
-        </select>
+          <select
+            className={styles.selectField}
+            onChange={(e) => setStatusFilter(e.target.value)}
+          >
+            <option value="">All Status</option>
+            <option>Pending</option>
+            <option>Packed</option>
+            <option>Out for Delivery</option>
+            <option>Delivered</option>
+          </select>
+        </div>
       </div>
 
       {/* TABLE */}
-      <div className="bg-white rounded shadow overflow-x-auto">
-        <table className="w-full">
-          <thead className="bg-gray-100">
+      <div className={styles.tableContainer}>
+        <table className={styles.deliveryTable}>
+          <thead className={styles.tableHeader}>
             <tr>
-              <th className="border p-3">Order</th>
-              <th className="border p-3">Customer</th>
-              <th className="border p-3">Address</th>
-              <th className="border p-3">Rider</th>
-              <th className="border p-3">Status</th>
-              <th className="border p-3">Actions</th>
+              <th>Order</th>
+              <th>Customer</th>
+              <th>Address</th>
+              <th className="text-center">Rider</th>
+              <th className="text-center">Status</th>
+              <th className="text-center">Actions</th>
             </tr>
           </thead>
 
           <tbody>
             {paginatedDeliveries.map((d) => (
-              <tr key={d.id}>
-                <td className="border p-3">#{d.orderId}</td>
-                <td className="border p-3">{d.customer}</td>
-                <td className="border p-3">{d.address}</td>
-                <td className="border p-3 text-center">
+              <tr key={d.id} className={styles.tableRow}>
+                <td className={styles.tableCell}>#{d.orderId}</td>
+                <td className={styles.tableCell}>{d.customer}</td>
+                <td className={styles.tableCell}>{d.address}</td>
+                <td className={`${styles.tableCell} text-center`}>
                   {d.rider || "Unassigned"}
                 </td>
-                <td className="border p-3 text-center">
+                <td className={`${styles.tableCell} text-center`}>
                   <StatusBadge status={d.status} />
                 </td>
 
-                <td className="border p-3 text-center space-x-3">
+                <td className={`${styles.tableCell} text-center`}>
                   <button
                     onClick={() => setSelectedDelivery(d)}
-                    className="text-indigo-600"
+                    className={`${styles.actionBtn} ${styles.btnEye}`}
+                    title="View Details"
                   >
                     <FaEye />
                   </button>
@@ -146,7 +148,8 @@ const Delivery = () => {
                         onClick={() =>
                           updateStatus(d.id, "Out for Delivery")
                         }
-                        className="text-blue-600"
+                        className={`${styles.actionBtn} ${styles.btnTruck}`}
+                        title="Mark Out for Delivery"
                       >
                         <FaTruck />
                       </button>
@@ -155,7 +158,8 @@ const Delivery = () => {
                         onClick={() =>
                           updateStatus(d.id, "Delivered")
                         }
-                        className="text-green-600"
+                        className={`${styles.actionBtn} ${styles.btnCheck}`}
+                        title="Mark Delivered"
                       >
                         <FaCheckCircle />
                       </button>
@@ -169,15 +173,15 @@ const Delivery = () => {
       </div>
 
       {/* PAGINATION */}
-      <div className="flex justify-end gap-2 mt-4">
+      <div className={styles.pagination}>
         {[...Array(totalPages)].map((_, i) => (
           <button
             key={i}
             onClick={() => setPage(i + 1)}
-            className={`px-3 py-1 rounded ${
+            className={`${styles.pageBtn} ${
               page === i + 1
-                ? "bg-blue-600 text-white"
-                : "bg-gray-200"
+                ? styles.pageBtnActive
+                : ""
             }`}
           >
             {i + 1}
@@ -187,19 +191,33 @@ const Delivery = () => {
 
       {/* DELIVERY DETAIL MODAL */}
       {selectedDelivery && (
-        <div className="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center">
-          <div className="bg-white p-6 rounded w-96">
-            <h3 className="font-semibold mb-3">
+        <div className={styles.modalOverlay}>
+          <div className={styles.modalContent}>
+            <h3 className="text-xl font-bold mb-4 text-gray-800">
               Delivery Details
             </h3>
-            <p><b>Order:</b> #{selectedDelivery.orderId}</p>
-            <p><b>Customer:</b> {selectedDelivery.customer}</p>
-            <p><b>Address:</b> {selectedDelivery.address}</p>
-            <p><b>Status:</b> {selectedDelivery.status}</p>
+            <div className="space-y-3">
+              <p className="flex justify-between border-b pb-2">
+                <span className="text-gray-500">Order:</span>
+                <span className="font-semibold">#{selectedDelivery.orderId}</span>
+              </p>
+              <p className="flex justify-between border-b pb-2">
+                <span className="text-gray-500">Customer:</span>
+                <span className="font-semibold">{selectedDelivery.customer}</span>
+              </p>
+              <p className="flex justify-between border-b pb-2">
+                <span className="text-gray-500">Address:</span>
+                <span className="font-medium">{selectedDelivery.address}</span>
+              </p>
+              <p className="flex justify-between items-center">
+                <span className="text-gray-500">Status:</span>
+                <StatusBadge status={selectedDelivery.status} />
+              </p>
+            </div>
 
             <button
               onClick={() => setSelectedDelivery(null)}
-              className="mt-4 bg-gray-600 text-white px-4 py-1 rounded"
+              className={styles.modalCloseBtn}
             >
               Close
             </button>
@@ -212,20 +230,22 @@ const Delivery = () => {
 
 /* Helpers */
 const Stat = ({ title, value }) => (
-  <div className="bg-white p-4 shadow rounded">
-    <h4>{title}</h4>
-    <p className="text-xl font-bold">{value}</p>
+  <div className={styles.statCard}>
+    <h4 className={styles.statTitle}>{title}</h4>
+    <p className={styles.statValue}>{value}</p>
   </div>
 );
 
 const StatusBadge = ({ status }) => (
   <span
-    className={`px-2 py-1 rounded text-sm ${
+    className={`${styles.statusBadge} ${
       status === "Delivered"
-        ? "bg-green-100 text-green-700"
+        ? styles.statusDelivered
         : status === "Out for Delivery"
-        ? "bg-blue-100 text-blue-700"
-        : "bg-yellow-100 text-yellow-700"
+        ? styles.statusOut
+        : status === "Packed"
+        ? styles.statusPacked
+        : styles.statusPending
     }`}
   >
     {status}
