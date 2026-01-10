@@ -11,10 +11,9 @@ import PrivateRoute from "./component/PrivateRoute.jsx";
 const DashboardPage = lazy(() => import("./pages/DashboardPage.jsx"));
 const LoginPage = lazy(() => import("./pages/LoginPage.jsx"));
 const UserDetails = lazy(() => import("./component/UserDetails.jsx"));
-const UserLifecycle = lazy(() => import("./component/UserLifecycle.jsx"));
 const OrderDetail = lazy(() => import("./component/OrderDetail.jsx"));
-const CreateOrderDetail = lazy(() => import("./component/CreateOrderDetail.jsx"));
 const Dashboard = lazy(() => import("./component/Dashboard/Dashboard.jsx"));
+const Meal = lazy(() => import("./component/Meal.jsx"));
 
 // ------------------- ROUTER CONFIG -------------------
 const router = createBrowserRouter([
@@ -29,9 +28,8 @@ const router = createBrowserRouter([
           { index: true, element: <Dashboard /> },
           { path: "dashboard", element: <Dashboard /> },
           { path: "users", element: <UserDetails /> }, // ✅ USER DETAILS ROUTE
-          { path: "user-lifecycle", element: <UserLifecycle /> },
           { path: "order-details", element: <OrderDetail /> },
-          { path: "create-order", element: <CreateOrderDetail /> },
+          { path: "meals", element: <Meal /> },
           { path: "meal-creation", element: <Dashboard /> },
           { path: "plan-master", element: <Dashboard /> },
           { path: "meal-master", element: <Dashboard /> },
