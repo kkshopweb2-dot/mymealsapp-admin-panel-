@@ -12,7 +12,9 @@ import {
   FaSpinner,
   FaCheckCircle,
   FaHourglassHalf,
-  FaClock
+  FaClock,
+  FaCube,
+  FaInfoCircle
 } from "react-icons/fa";
 import styles from "../css/Production.module.css";
 
@@ -198,7 +200,9 @@ const Production = () => {
 
         <div className={styles.formGrid}>
           <div className="flex flex-col">
-            <label className="mb-2 text-sm font-bold text-gray-600 ml-2">Item Name</label>
+            <label className="mb-2 text-sm font-bold text-gray-600 ml-2">
+                <FaCube className="inline mr-1 text-gray-400"/> Item Name
+            </label>
             <input
               type="text"
               placeholder="e.g. Widget X"
@@ -209,7 +213,9 @@ const Production = () => {
           </div>
 
           <div className="flex flex-col">
-            <label className="mb-2 text-sm font-bold text-gray-600 ml-2">Quantity</label>
+            <label className="mb-2 text-sm font-bold text-gray-600 ml-2">
+                <FaBoxOpen className="inline mr-1 text-gray-400"/> Quantity
+            </label>
             <input
               type="number"
               placeholder="0"
@@ -220,7 +226,9 @@ const Production = () => {
           </div>
 
           <div className="flex flex-col">
-            <label className="mb-2 text-sm font-bold text-gray-600 ml-2">Status</label>
+            <label className="mb-2 text-sm font-bold text-gray-600 ml-2">
+                <FaInfoCircle className="inline mr-1 text-gray-400"/> Status
+            </label>
             <select
               value={form.status}
               onChange={(e) => setForm({ ...form, status: e.target.value })}

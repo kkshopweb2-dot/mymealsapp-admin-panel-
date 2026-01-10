@@ -21,6 +21,9 @@ const Delivery = lazy(() => import("./component/Delivery.jsx"));
 const Stock = lazy(() => import("./component/stock.jsx"));
 const Production = lazy(() => import("./component/production.jsx"));
 const Purchase = lazy(() => import("./component/Purchase.jsx"));
+const Employees = lazy(() => import("./component/Employees.jsx"));
+const Salary = lazy(() => import("./component/Salary.jsx"));
+const Mail = lazy(() => import("./component/Mail.jsx"));
 
 // ------------------- ROUTER CONFIG -------------------
 const router = createBrowserRouter([
@@ -42,6 +45,9 @@ const router = createBrowserRouter([
           { path: "stock", element: <Stock /> },
           { path: "production", element: <Production /> },
           { path: "purchase", element: <Purchase /> },
+          { path: "employees", element: <Employees /> },
+          { path: "salary", element: <Salary /> },
+          { path: "mail", element: <Mail /> },
           { path: "meals", element: <Meal /> },
           { path: "meal-creation", element: <Dashboard /> },
           { path: "plans", element: <Plans /> },
@@ -49,7 +55,7 @@ const router = createBrowserRouter([
           { path: "meal-master", element: <Dashboard /> },
           { path: "payment-table", element: <Payment /> },
           { path: "payment-gateway", element: <Dashboard /> },
-          { path: "employee-details", element: <Dashboard /> },
+          { path: "employee-details", element: <Employees /> },
           { path: "notifications", element: <Dashboard /> },
           { path: "system-configurations", element: <Dashboard /> },
           { path: "settings", element: <Dashboard /> },
