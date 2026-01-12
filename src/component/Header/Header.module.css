@@ -1,11 +1,18 @@
 /* ===== HEADER MAIN CONTAINER ===== */
+/* Gives the header a "floating panel" 3D look */
 .dashboard-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1.2rem 2rem;
-  background-color: #fff;
-  border-bottom: 1px solid #2A3B4C;
+  padding: 1rem 2rem;
+  background: #ffffff;
+  /* Deep shadow for depth */
+  box-shadow: 
+    0 10px 20px rgba(0, 0, 0, 0.05),
+    0 6px 6px rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid rgba(0,0,0,0.05);
+  z-index: 50;
+  position: relative;
 }
 
 /* ===== LEFT SECTION ===== */
@@ -19,105 +26,134 @@
 .right-section {
   display: flex;
   align-items: center;
-  gap: 2rem;
+  gap: 1.5rem;
 }
 
-/* ===== ICONS (Notification, etc.) ===== */
+/* ===== ICON WRAPPER (Neumorphic/3D Button Look) ===== */
 .icon-wrapper {
   position: relative;
   cursor: pointer;
-}
-
-.icon {
-  font-size: 1.4rem;
-  color: #2A3B4C;
-  transition: color 0.3s ease;
-}
-
-.icon:hover {
-  color: #FFFFFF;
-}
-
-/* ===== PROFILE IMAGE ===== */
-.profile-wrapper {
-  display: flex;
-  align-items: center;
-}
-
-.profile-img {
-  width: 38px;
-  height: 38px;
+  width: 45px;
+  height: 45px;
   border-radius: 50%;
-  object-fit: cover;
-  border: 2px solid #2A3B4C;
-  background-color: #1A293A;
-}
-
-/* ===== FIRST LETTER BADGE (If no image) ===== */
-.profile-letter {
-  width: 38px;
-  height: 38px;
-  border-radius: 50%;
-  background: #104b45;
-  color: white;
-  font-weight: 600;
+  background: #ffffff;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.1rem;
+  transition: all 0.2s ease;
+  
+  /* Soft 3D Shadow */
+  box-shadow: 
+    5px 5px 10px #d9d9d9, 
+    -5px -5px 10px #ffffff;
 }
 
-/* ===== SEARCH BOX (If used) ===== */
-.header-search {
+.icon-wrapper:hover {
+  transform: translateY(-2px);
+  box-shadow: 
+    8px 8px 15px #d1d1d1, 
+    -8px -8px 15px #ffffff;
+}
+
+.icon-wrapper:active {
+  transform: translateY(1px);
+  /* Pressed state */
+  box-shadow: 
+    inset 4px 4px 8px #d9d9d9, 
+    inset -4px -4px 8px #ffffff;
+}
+
+.icon {
+  font-size: 1.2rem;
+  color: #555;
+  transition: color 0.3s ease;
+}
+
+.icon-wrapper:hover .icon {
+  color: #333;
+}
+
+/* ===== PROFILE IMAGE (Raised Circle) ===== */
+.profile-wrapper {
   display: flex;
   align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  padding: 3px;
   background: #fff;
-  padding: 6px 14px;
-  border-radius: 20px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  /* Ring shadow effect */
+  box-shadow: 
+    0 0 10px rgba(0,0,0,0.1),
+    inset 0 0 0 1px rgba(0,0,0,0.05);
 }
 
-.search-input {
-  border: none;
-  outline: none;
-  margin-left: 8px;
-  width: 260px;
-  background: transparent;
-  font-size: 0.95rem;
+.profile-img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  display: block;
+  /* Inner shadow on the image itself for depth */
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
 }
 
-.search-button {
-  background: transparent;
-  border: none;
-  cursor: pointer;
-}
-
-/* ===== LOGOUT BUTTON ===== */
+/* ===== LOGOUT BUTTON (Chunky 3D Button) ===== */
 .logout-btn {
-  background: #ff4d4f;
+  background: linear-gradient(145deg, #ff6b6d, #ee4547);
   color: #fff;
   border: none;
-  padding: 6px 12px;
-  border-radius: 20px;
+  padding: 10px 20px;
+  border-radius: 30px;
   cursor: pointer;
-  font-weight: 500;
+  font-weight: 700;
+  font-size: 0.9rem;
   display: flex;
   align-items: center;
-  gap: 5px;
+  gap: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  
+  /* The "Side" of the 3D button */
+  box-shadow: 
+    0 5px 0 #bf3032,
+    0 10px 10px rgba(0,0,0,0.15);
+    
+  transition: all 0.15s ease;
+  transform: translateY(0);
 }
 
 .logout-btn:hover {
-  background: #e04345;
+  background: linear-gradient(145deg, #ff7e80, #ff5a5c);
+  transform: translateY(-2px);
+  box-shadow: 
+    0 7px 0 #bf3032,
+    0 12px 15px rgba(0,0,0,0.2);
+}
+
+.logout-btn:active {
+  /* Pressed down effect */
+  transform: translateY(5px);
+  box-shadow: 
+    0 0 0 #bf3032,
+    inset 0 3px 5px rgba(0,0,0,0.2);
+}
+
+.logout-btn svg {
+  font-size: 1.1rem;
 }
 
 /* ===== MOBILE RESPONSIVE ===== */
 @media (max-width: 768px) {
-  .search-input {
-    width: 150px;
-  }
-
   .dashboard-header {
     padding: 1rem;
   }
+  
+  .logout-btn span {
+    display: none; /* Hide text on small screens, keep icon */
+  }
+  
+  .logout-btn {
+    padding: 10px;
+    border-radius: 50%; /* Circle button on mobile */
+  }
 }
-

@@ -1,8 +1,18 @@
 import React from 'react';
-import { FaBell } from 'react-icons/fa';
+import { FaBell, FaSignOutAlt } from 'react-icons/fa';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { logout } from '../redux/authSlice';
 import styles from './Header/Header.module.css';
 
 const Header = ({ admin }) => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    dispatch(logout());
+    navigate('/login');
+  };
 
   return (
     <header className={styles['dashboard-header']}>
@@ -11,7 +21,7 @@ const Header = ({ admin }) => {
       <div className={styles['left-section']}>
       </div>
 
-      {/* RIGHT — Notifications + Profile */}
+      {/* RIGHT — Notifications + Profile + Logout */}
       <div className={styles['right-section']}>
 
         <div className={styles['icon-wrapper']}>
@@ -28,6 +38,10 @@ const Header = ({ admin }) => {
             />
           </div>
         )}
+
+        <button className={styles['logout-btn']} onClick={handleLogout}>
+          <FaSignOutAlt /> Logout
+        </button>
 
       </div>
 
