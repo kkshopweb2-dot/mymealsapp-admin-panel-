@@ -17,6 +17,7 @@ const Meal = lazy(() => import("./component/Meal.jsx"));
 const Plans = lazy(() => import("./component/Plans.jsx"));
 const Order = lazy(() => import("./component/Order.jsx"));
 const Payment = lazy(() => import("./component/Payment.jsx"));
+const PaymentGateway = lazy(() => import("./component/PaymentGateway.jsx"));
 const Delivery = lazy(() => import("./component/Delivery.jsx"));
 const Stock = lazy(() => import("./component/stock.jsx"));
 const Production = lazy(() => import("./component/production.jsx"));
@@ -54,7 +55,7 @@ const router = createBrowserRouter([
           { path: "plan-master", element: <Plans /> },
           { path: "meal-master", element: <Dashboard /> },
           { path: "payment-table", element: <Payment /> },
-          { path: "payment-gateway", element: <Dashboard /> },
+          { path: "payment-gateway", element: <PaymentGateway /> },
           { path: "employee-details", element: <Employees /> },
           { path: "notifications", element: <Dashboard /> },
           { path: "system-configurations", element: <Dashboard /> },
