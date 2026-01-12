@@ -240,7 +240,7 @@ export default function Settings() {
         </label>
       </div>
 
-      <button className={styles.btnPrimary}>
+      <button className={`${styles.btn3d} ${styles.btnPrimary}`}>
         <FaSave /> All Changes Saved Automatically
       </button>
     </div>

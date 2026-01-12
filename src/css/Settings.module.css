@@ -105,6 +105,9 @@
   margin-bottom: 3rem;
   transform-style: preserve-3d;
   transform: translateZ(20px);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .title {
