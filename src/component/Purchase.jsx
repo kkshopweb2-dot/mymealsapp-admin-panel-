@@ -42,7 +42,7 @@ const Purchase = () => {
       setPurchases(res.data);
     } catch (err) {
       console.error(err);
-      setError("Failed to fetch purchases");
+      setError("");
     } finally {
       setLoading(false);
     }

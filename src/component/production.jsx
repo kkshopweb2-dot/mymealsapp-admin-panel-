@@ -42,7 +42,7 @@ const Production = () => {
       const res = await axios.get(`${API_BASE}/production`);
       setEntries(res.data);
     } catch (err) {
-      setError("Error fetching production data");
+      setError("");
       console.error(err);
     } finally {
       setLoading(false);
