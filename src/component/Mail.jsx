@@ -173,6 +173,7 @@ const Mail = () => {
           <input
             type="text"
             name="subject"
+            placeholder="Enter subject..."
             value={formik.values.subject}
             onChange={formik.handleChange}
             className={styles.input}

@@ -27,7 +27,7 @@ const Stock = () => {
       setItems(res.data);
     } catch (err) {
       console.error(err);
-      setError("Error fetching stock items");
+      setError("");
     } finally {
       setLoading(false);
     }
