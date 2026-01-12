@@ -25,6 +25,7 @@ const Purchase = lazy(() => import("./component/Purchase.jsx"));
 const Employees = lazy(() => import("./component/Employees.jsx"));
 const Salary = lazy(() => import("./component/Salary.jsx"));
 const Mail = lazy(() => import("./component/Mail.jsx"));
+const Settings = lazy(() => import("./component/Settings.jsx"));
 
 // ------------------- ROUTER CONFIG -------------------
 const router = createBrowserRouter([
@@ -59,7 +60,7 @@ const router = createBrowserRouter([
           { path: "employee-details", element: <Employees /> },
           { path: "notifications", element: <Dashboard /> },
           { path: "system-configurations", element: <Dashboard /> },
-          { path: "settings", element: <Dashboard /> },
+          { path: "settings", element: <Settings /> },
         ],
       },
     ],

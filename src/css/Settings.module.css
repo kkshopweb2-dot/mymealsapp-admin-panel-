@@ -1,0 +1,422 @@
+/* Business Hours Specifics */
+.hoursGrid {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  margin-top: 1.5rem;
+}
+
+.hoursRow {
+  display: grid;
+  grid-template-columns: 120px 1fr 2fr;
+  align-items: center;
+  padding: 1.25rem 1.5rem;
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 18px;
+  border: 1px solid rgba(255,255,255,0.4);
+  box-shadow: 
+    4px 4px 8px rgba(0,0,0,0.03),
+    -4px -4px 8px rgba(255,255,255,0.8);
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transform-style: preserve-3d;
+}
+
+.hoursRow:hover {
+  transform: translateZ(15px) scale(1.02);
+  background: white;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+}
+
+.dayLabel {
+  font-weight: 800;
+  text-transform: capitalize;
+  color: #1e293b;
+  font-size: 1.1rem;
+  letter-spacing: 0.5px;
+}
+
+.statusToggle {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+  font-weight: 700;
+  font-size: 0.85rem;
+  width: fit-content;
+}
+
+.statusOpen {
+  background: #ecfdf5;
+  color: #059669;
+  border: 1px solid #6ee7b7;
+}
+
+.statusClosed {
+  background: #fef2f2;
+  color: #dc2626;
+  border: 1px solid #fecaca;
+}
+
+.timeControls {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  justify-content: flex-end;
+}
+
+.timeInput {
+  background: #f8fafc;
+  border: none;
+  padding: 0.6rem 0.8rem;
+  border-radius: 10px;
+  color: #475569;
+  font-weight: 600;
+  font-family: 'Inter', sans-serif;
+  box-shadow: inset 2px 2px 4px rgba(0,0,0,0.05);
+  transition: all 0.3s ease;
+  outline: none;
+}
+
+.timeInput:focus {
+  background: white;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+  transform: translateZ(5px);
+}
+
+.timeSeparator {
+  font-weight: 800;
+  color: #cbd5e1;
+}
+
+/* Rest of existing CSS... */
+.container {
+  padding: 2.5rem;
+  background: linear-gradient(135deg, #f0f4f8 0%, #e2e8f0 100%);
+  min-height: 100vh;
+  perspective: 2000px;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  overflow-x: hidden;
+}
+
+.header {
+  margin-bottom: 3rem;
+  transform-style: preserve-3d;
+  transform: translateZ(20px);
+}
+
+.title {
+  font-size: 2.5rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  text-shadow: 2px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.card {
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(20px);
+  padding: 2.5rem;
+  border-radius: 24px;
+  box-shadow: 
+    0 20px 50px -12px rgba(0, 0, 0, 0.1),
+    0 1px 3px rgba(0,0,0,0.05),
+    inset 0 1px 0 rgba(255, 255, 255, 0.6);
+  transform-style: preserve-3d;
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease;
+  max-width: 900px;
+  margin-bottom: 2.5rem;
+  border: 1px solid rgba(255,255,255,0.5);
+}
+
+.card:hover {
+  transform: translateY(-8px) rotateX(1deg);
+  box-shadow: 0 30px 60px -12px rgba(0, 0, 0, 0.15);
+}
+
+.sectionTitle {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #1e293b;
+  margin-bottom: 2rem;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border-bottom: 2px solid rgba(0,0,0,0.05);
+  padding-bottom: 1rem;
+  transform: translateZ(30px);
+}
+
+/* Form Elements */
+.formGroup {
+  margin-bottom: 1.5rem;
+  transform: translateZ(20px);
+}
+
+.label {
+  display: block;
+  margin-bottom: 0.75rem;
+  font-weight: 600;
+  color: #475569;
+  font-size: 0.95rem;
+  letter-spacing: 0.02em;
+}
+
+.checkboxContainer {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  transform: translateZ(25px);
+}
+
+.checkboxLabel {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 1.25rem;
+  background: linear-gradient(145deg, #ffffff, #f3f4f6);
+  border-radius: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 
+    5px 5px 10px #d1d9e6, 
+    -5px -5px 10px #ffffff;
+  border: 1px solid transparent;
+}
+
+.checkboxLabel:hover {
+  transform: translateY(-3px) translateZ(10px);
+  box-shadow: 
+    8px 8px 16px #d1d9e6, 
+    -8px -8px 16px #ffffff;
+  border-color: #3b82f6;
+}
+
+.input3d {
+  width: 100%;
+  border: none;
+  padding: 1rem 1.25rem;
+  border-radius: 16px;
+  outline: none;
+  transition: all 0.3s ease;
+  background: #f8fafc;
+  color: #475569;
+  font-weight: 500;
+  box-shadow: inset 2px 2px 5px rgba(0,0,0,0.05), inset -2px -2px 5px rgba(255,255,255,0.8);
+  box-sizing: border-box;
+  font-size: 1rem;
+}
+
+.input3d:focus {
+  background: white;
+  box-shadow: 
+    0 0 0 4px rgba(59, 130, 246, 0.15),
+    0 10px 20px -5px rgba(59, 130, 246, 0.1);
+  transform: translateY(-2px) translateZ(15px);
+}
+
+/* Buttons */
+.btn3d {
+  padding: 1rem 2.5rem;
+  border-radius: 16px;
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  margin-top: 2rem;
+  font-size: 1.1rem;
+  transform: translateZ(40px);
+  position: relative;
+  overflow: hidden;
+}
+
+.btnPrimary {
+  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+  color: white;
+  box-shadow: 
+    0 10px 20px -5px rgba(37, 99, 235, 0.4),
+    inset 0 2px 0 rgba(255,255,255,0.2);
+}
+
+.btnPrimary:hover {
+  transform: translateY(-5px) translateZ(50px) scale(1.02);
+  box-shadow: 
+    0 20px 30px -10px rgba(37, 99, 235, 0.5),
+    inset 0 2px 0 rgba(255,255,255,0.2);
+}
+
+.btnPrimary:active {
+  transform: translateY(-2px) translateZ(30px);
+}
+
+.loading {
+  text-align: center;
+  padding: 4rem;
+  color: #64748b;
+  font-size: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 60vh;
+  gap: 1.5rem;
+}
+
+.spinner {
+  animation: spin 1s linear infinite;
+  font-size: 3rem;
+  color: #3b82f6;
+  filter: drop-shadow(0 4px 6px rgba(59, 130, 246, 0.3));
+}
+
+/* ... existing styles ... */
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.iconBtn {
+  background: rgba(255, 255, 255, 0.5);
+  border: none;
+  padding: 0.75rem;
+  border-radius: 50%;
+  font-size: 1.25rem;
+  color: #1e293b;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+}
+
+.iconBtn:hover {
+  transform: translateY(-2px);
+  background: white;
+  box-shadow: 0 8px 12px rgba(0,0,0,0.1);
+  color: #3b82f6;
+}
+
+/* ---------------- DARK MODE ---------------- */
+
+.dark {
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+  color: #e2e8f0;
+}
+
+.dark .title {
+  background: linear-gradient(135deg, #60a5fa 0%, #3b82f6 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
+}
+
+.dark .iconBtn {
+  background: rgba(30, 41, 59, 0.6);
+  color: #94a3b8;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+}
+
+.dark .iconBtn:hover {
+  background: #334155;
+  color: #60a5fa;
+  box-shadow: 0 8px 12px rgba(0,0,0,0.3);
+}
+
+.dark .card {
+  background: rgba(30, 41, 59, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 
+    0 20px 50px -12px rgba(0, 0, 0, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+.dark .card:hover {
+  background: rgba(30, 41, 59, 0.85);
+  box-shadow: 0 30px 60px -12px rgba(0, 0, 0, 0.6);
+  border-color: rgba(96, 165, 250, 0.3);
+}
+
+.dark .sectionTitle {
+  color: #f1f5f9;
+  border-bottom-color: rgba(255, 255, 255, 0.08);
+}
+
+.dark .label {
+  color: #cbd5e1;
+}
+
+.dark .input3d,
+.dark .timeInput {
+  background: #0f172a;
+  color: #f1f5f9;
+  box-shadow: inset 2px 2px 5px rgba(0,0,0,0.5), inset -1px -1px 2px rgba(255,255,255,0.05);
+}
+
+.dark .input3d:focus,
+.dark .timeInput:focus {
+  background: #1e293b;
+  box-shadow: 
+    0 0 0 3px rgba(59, 130, 246, 0.3),
+    0 10px 20px -5px rgba(0, 0, 0, 0.5);
+}
+
+.dark .checkboxLabel {
+  background: linear-gradient(145deg, #1e293b, #0f172a);
+  box-shadow: 
+    5px 5px 10px #0b1120, 
+    -5px -5px 10px #2a3855;
+  color: #e2e8f0;
+}
+
+.dark .checkboxLabel:hover {
+  box-shadow: 
+    8px 8px 16px #0b1120, 
+    -8px -8px 16px #2a3855;
+  border-color: #60a5fa;
+}
+
+.dark .hoursRow {
+  background: rgba(15, 23, 42, 0.6);
+  border-color: rgba(255, 255, 255, 0.05);
+  box-shadow: 
+    4px 4px 8px rgba(0,0,0,0.3),
+    -4px -4px 8px rgba(255,255,255,0.02);
+}
+
+.dark .hoursRow:hover {
+  background: #1e293b;
+}
+
+.dark .dayLabel {
+  color: #f1f5f9;
+}
+
+.dark .timeSeparator {
+  color: #64748b;
+}
+
+.dark .loading {
+  color: #94a3b8;
+}
+
+.dark .statusClosed {
+  background: rgba(220, 38, 38, 0.15);
+  color: #fca5a5;
+  border-color: rgba(220, 38, 38, 0.3);
+}
+
+.dark .statusOpen {
+  background: rgba(5, 150, 105, 0.15);
+  color: #6ee7b7;
+  border-color: rgba(5, 150, 105, 0.3);
+}
